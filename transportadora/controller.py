@@ -5,7 +5,8 @@ from typing import List, Dict
 
 from .service import TransportadoraService
 from .model import Transportadora
-from .schema import TransportadoraSchema, TransportadoraUpdateSchema, transportadoraOpcoesSchema
+from .schema import TransportadoraSchema, transportadoraOpcoesSchema
+
 
 api = Namespace('Transportadora')
 
@@ -34,14 +35,12 @@ class TransportadoraIdResource(Resource):
     @responds(schema=TransportadoraSchema())
     def get(self, ID: int) -> Transportadora:
         return TransportadoraService().get_by_id(ID)
-    
+
     def delete(self, ID: int) -> Response:
-        deleted_id = TransportadoraService().delete_by_id(ID)
-        return jsonify(dict(status='sucess', id=deleted_id))
+        return TransportadoraService().delete_by_id(ID)
     
-    @accepts(schema=TransportadoraUpdateSchema, api=api)
+    @accepts(schema=TransportadoraSchema, api=api)
     @responds(schema=TransportadoraSchema())
-    def put(self) -> Transportadora:
+    def put(self, ID: int) -> Transportadora:
         transportadora = request.json
-        ID = transportadora.get('id')
         return TransportadoraService.update(ID, transportadora)

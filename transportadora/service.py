@@ -1,12 +1,12 @@
-from .model import Transportadora
-from .interface import TransportadoraInterface
-
 from typing import List
 from app import db
-from flask_sqlalchemy import Pagination
 from sqlalchemy import asc, desc
 from datetime import datetime
 from flask import jsonify
+
+from .model import Transportadora
+from .interface import TransportadoraInterface
+
 
 class TransportadoraService():
     @staticmethod
@@ -19,7 +19,7 @@ class TransportadoraService():
     
     @staticmethod
     def update(ID: int, transportadora: TransportadoraInterface) -> Transportadora:
-        existing_transportadora = Transportadora.query.filter_by(ID=ID).first_or_404(description='não existem transportadoras com o id {}'.formatr(ID))
+        existing_transportadora = Transportadora.query.filter_by(ID=ID).first_or_404(description='não existem transportadoras com o id {}'.format(ID))
         existing_transportadora.update(transportadora)
         db.session.commit()
         return existing_transportadora
@@ -45,15 +45,14 @@ class TransportadoraService():
         
         db.session.add(new_transportadora)
         db.session.commit()
-        return new_transportadora
+        return jsonify({"message": "transportadora cadastrada com sucesso!"})
     
     @staticmethod
     def delete_by_id(ID: int) -> List[str]:
         transportadora = Transportadora.query.filter_by(ID=ID).first_or_404(description='não existem transportadoras com o id {}'.format(ID))
         db.session.delete(transportadora)
         db.session.commit()
-        return [ANIME_ID]
-    
+        return jsonify({"message": "transportadora deletada com sucesso!"})
     
     @staticmethod
     def getOpcoesDeFrete(pacote):

@@ -1,6 +1,11 @@
 from marshmallow import fields, Schema, EXCLUDE
 
-class TransportadoraBaseSchema(Schema):
+
+class TransportadoraSchema(Schema):
+    class Meta:
+        unknown = EXCLUDE
+    
+    id = fields.Integer(attribute='ID', required=False)
     altura_max = fields.Integer(attribute='ALTURA_MAX', required=True)
     altura_min = fields.Integer(attribute='ALTURA_MIN', required=True)
     largura_max = fields.Integer(attribute='LARGURA_MAX', required=True)
@@ -8,15 +13,6 @@ class TransportadoraBaseSchema(Schema):
     prazo_entrega = fields.Integer(attribute='PRAZO_ENTREGA', required=True)
     nome = fields.String(attribute='NOME', required=True)
     constante_frete = fields.Float(attribute='CONSTANTE_FRETE', required=True)
-
-class TransportadoraSchema(TransportadoraBaseSchema):
-    class Meta:
-        unknown = EXCLUDE
-    
-    id = fields.Integer(attribute='ID', required=False)
-    
-class TransportadoraUpdateSchema(TransportadoraSchema):
-    id = fields.Integer(attribute='ID', required=True)
     
 class DimensaoSchema(Schema):
     altura = fields.Integer(required=True)
