@@ -48,11 +48,9 @@ UNLOCK TABLES;
 SQLALCHEMY_DATABASE_URI="mysql://usuario:senha@host:porta/base"
 ```
 
-## Instalação de dependencias
+## Instalação de dependencias (ambiente virtual)
 ```sh
 pipenv install
-
-# depois execute
 pipenv shell
 ```
 
@@ -66,6 +64,8 @@ python main.py
 ## Cadastro de transportadoras [POST]
 ```sh
 http://localhost:8080/v1/transportadora
+```
+```sh
 {
     "altura_max": 140,
     "altura_min": 5,
@@ -80,6 +80,8 @@ http://localhost:8080/v1/transportadora
 ## Opções de frete [POST]
 ```sh
 http://localhost:8080/v1/transportadora/opcoes_frete
+```
+```sh
 {
     "dimensao": {"altura":102, "largura":40},
     "peso":400
@@ -104,8 +106,9 @@ http://localhost:8080/v1/transportadora/1
 ## Update de transportadora [PUT]
 ```sh
 http://localhost:8080/v1/transportadora/1
+```
+```sh
 {
-    "id": 2,
     "altura_max": 140,
     "altura_min": 5,
     "largura_max": 125,
