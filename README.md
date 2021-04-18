@@ -38,6 +38,8 @@ SQLALCHEMY_DATABASE_URI="mysql://usuario:senha@host:porta/base"
 
 # instalação de dependencias
 pipenv install
+
+# depois execute
 pipenv shell
 
 # execução do projeto
