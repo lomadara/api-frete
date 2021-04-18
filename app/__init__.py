@@ -1,7 +1,6 @@
 from flask import Flask, Blueprint
 from flask_restx import Api
 from flask_cors import CORS
-from flask_mongoengine import MongoEngine
 from flask_sqlalchemy import SQLAlchemy
 
 

@@ -3,10 +3,10 @@ from mypy_extensions import TypedDict
 
 
 class TransportadoraInterface(TypedDict, total=False):
-    ALTURA_MAX: int
-    ALTURA_MIN: int
-    LARGURA_MAX: int
-    LARGURA_MIN: int
-    PRAZO_ENTREGA: int
-    NOME: str
-    CONSTANTE_FRETE: float
+    altura_max: int
+    altura_min: int
+    largura_max: int
+    largura_min: int
+    prazo_entrega: int
+    nome: str
+    constante_frete: float

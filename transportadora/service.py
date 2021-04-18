@@ -26,7 +26,7 @@ class TransportadoraService():
     
     @staticmethod
     def create(transportadora: TransportadoraInterface) -> Transportadora:
-        existing_trasnportadora = Transportadora.query.filter_by(NOME=transportadora.get('NOME')).first()
+        existing_trasnportadora = Transportadora.query.filter_by(NOME=transportadora.get('nome')).first()
         
         if bool(existing_trasnportadora):
             resp = jsonify({'message': 'Já existe um cadastro para a transportadora com o id {} .'.format(existing_trasnportadora.ID), 'id': existing_trasnportadora.ID})
@@ -34,13 +34,13 @@ class TransportadoraService():
             return resp
         
         new_transportadora = Transportadora(
-            ALTURA_MAX = transportadora.get('ALTURA_MAX'),
-            ALTURA_MIN = transportadora.get('ALTURA_MIN'),
-            LARGURA_MAX = transportadora.get('LARGURA_MAX'),
-            LARGURA_MIN = transportadora.get('LARGURA_MIN'),
-            PRAZO_ENTREGA = transportadora.get('PRAZO_ENTREGA'),
-            NOME = transportadora.get('NOME'),
-            CONSTANTE_FRETE = transportadora.get('CONSTANTE_FRETE')
+            ALTURA_MAX = transportadora.get('altura_max'),
+            ALTURA_MIN = transportadora.get('altura_min'),
+            LARGURA_MAX = transportadora.get('largura_max'),
+            LARGURA_MIN = transportadora.get('largura_min'),
+            PRAZO_ENTREGA = transportadora.get('prazo_entrega'),
+            NOME = transportadora.get('nome'),
+            CONSTANTE_FRETE = transportadora.get('constante_frete')
         )
         
         db.session.add(new_transportadora)

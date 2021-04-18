@@ -1,23 +1,27 @@
 from marshmallow import fields, Schema, EXCLUDE
 
-class PaginationSchema(Schema):
-    page = fields.Integer(attribute='page')
-    pages = fields.Integer(attribute='pages')
+class TransportadoraBaseSchema(Schema):
+    altura_max = fields.Integer(attribute='ALTURA_MAX', required=True)
+    altura_min = fields.Integer(attribute='ALTURA_MIN', required=True)
+    largura_max = fields.Integer(attribute='LARGURA_MAX', required=True)
+    largura_min = fields.Integer(attribute='LARGURA_MIN', required=True)
+    prazo_entrega = fields.Integer(attribute='PRAZO_ENTREGA', required=True)
+    nome = fields.String(attribute='NOME', required=True)
+    constante_frete = fields.Float(attribute='CONSTANTE_FRETE', required=True)
 
-
-class TransportadoraSchema(Schema):
+class TransportadoraSchema(TransportadoraBaseSchema):
     class Meta:
         unknown = EXCLUDE
     
-    ID = fields.Integer(attribute='ID', required=True)
-    ALTURA_MAX = fields.Integer(attribute='ALTURA_MAX', required=True)
-    ALTURA_MIN = fields.Integer(attribute='ALTURA_MIN', required=True)
-    LARGURA_MAX = fields.Integer(attribute='LARGURA_MAX', required=True)
-    LARGURA_MIN = fields.Integer(attribute='LARGURA_MIN', required=True)
-    PRAZO_ENTREGA = fields.Integer(attribute='PRAZO_ENTREGA', required=True)
-    NOME = fields.String(attribute='NOME', required=True)
-    CONSTANTE_FRETE = fields.Float(attribute='CONSTANTE_FRETE', required=True)
-
-
-class TransportadoraPageSchema(PaginationSchema):
-    items = fields.List(fields.Nested(TransportadoraSchema), attribute='items')
+    id = fields.Integer(attribute='ID', required=False)
+    
+class TransportadoraUpdateSchema(TransportadoraSchema):
+    id = fields.Integer(attribute='ID', required=True)
+    
+class DimensaoSchema(Schema):
+    altura = fields.Integer(required=True)
+    largura = fields.Integer(required=True)
+    
+class transportadoraOpcoesSchema(Schema):
+    dimensao = fields.Nested(DimensaoSchema, required=True)
+    peso = fields.Integer(required=True)
