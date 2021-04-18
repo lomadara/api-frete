@@ -58,6 +58,22 @@ class TransportadoraService():
     def getOpcoesDeFrete(pacote):
         dimensao = pacote.get('dimensao')
         peso = pacote.get('peso')
+
+        if peso <= 0:
+            resp = jsonify({"message": "o peso não pode ser menor ou igual a zero!"})
+            resp.status_code = 400
+            return resp
+        
+        if dimensao.get('altura') <= 0:
+            resp = jsonify({"message": "a altura não pode ser menor ou igual a zero!"})
+            resp.status_code = 400
+            return resp
+        
+        if dimensao.get('largura') <= 0:
+            resp = jsonify({"message": "a largura não pode ser menor ou igual a zero!"})
+            resp.status_code = 400
+            return resp
+
         transportadoras = Transportadora.query.filter(Transportadora.ALTURA_MAX >= dimensao.get('altura'))
         transportadoras = transportadoras.filter(Transportadora.ALTURA_MIN <= dimensao.get('altura'))
         transportadoras = transportadoras.filter(Transportadora.LARGURA_MAX >= dimensao.get('largura'))
